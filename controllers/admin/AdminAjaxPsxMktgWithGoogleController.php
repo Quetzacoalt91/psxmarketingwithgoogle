@@ -75,13 +75,13 @@ class AdminAjaxPsxMktgWithGoogleController extends ModuleAdminController
         parent::__construct();
         $this->bootstrap = false;
 
-        $this->errorHandler = $this->module->getService(ErrorHandler::class);
-        $this->configurationAdapter = $this->module->getService(ConfigurationAdapter::class);
-        $this->countryRepository = $this->module->getService(CountryRepository::class);
-        $this->productRepository = $this->module->getService(ProductRepository::class);
-        $this->attributesRepository = $this->module->getService(attributesRepository::class);
-        $this->googleTagProvider = $this->module->getService(GoogleTagProvider::class);
-        $this->currencyRepository = $this->module->getService(CurrencyRepository::class);
+        $this->errorHandler = $this->get(ErrorHandler::class);
+        $this->configurationAdapter = $this->get(ConfigurationAdapter::class);
+        $this->countryRepository = $this->get(CountryRepository::class);
+        $this->productRepository = $this->get(ProductRepository::class);
+        $this->attributesRepository = $this->get(attributesRepository::class);
+        $this->googleTagProvider = $this->get(GoogleTagProvider::class);
+        $this->currencyRepository = $this->get(CurrencyRepository::class);
         $this->ajax = true;
     }
 
@@ -262,7 +262,7 @@ class AdminAjaxPsxMktgWithGoogleController extends ModuleAdminController
     private function getCarrierValues()
     {
         /** @var CarrierDataProvider $carrierDataProvider */
-        $carrierDataProvider = $this->module->getService(CarrierDataProvider::class);
+        $carrierDataProvider = $this->get(CarrierDataProvider::class);
 
         $carrierLines = $carrierDataProvider->getFormattedData();
 

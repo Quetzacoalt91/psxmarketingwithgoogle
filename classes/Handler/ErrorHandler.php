@@ -62,7 +62,7 @@ class ErrorHandler
         );
 
         try {
-            $psAccountsService = $module->getService(PsAccounts::class)->getPsAccountsService();
+            $psAccountsService = $module->get(PsAccounts::class)->getPsAccountsService();
             $this->client->user_context([
                 'id' => $psAccountsService->getShopUuidV4(),
             ]);

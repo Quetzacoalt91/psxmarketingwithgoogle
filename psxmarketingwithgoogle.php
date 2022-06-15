@@ -27,7 +27,6 @@ use PrestaShop\Module\PsxMarketingWithGoogle\Handler\ErrorHandler;
 use PrestaShop\Module\PsxMarketingWithGoogle\Handler\RemarketingHookHandler;
 use PrestaShop\Module\PsxMarketingWithGoogle\Repository\TabRepository;
 use PrestaShop\Module\PsxMarketingWithGoogle\Tracker\Segment;
-use PrestaShop\ModuleLibServiceContainer\DependencyInjection\ServiceContainer;
 
 if (!defined('_PS_VERSION_')) {
     exit;
@@ -96,21 +95,7 @@ class PsxMarketingWithGoogle extends Module
 
         require_once __DIR__ . '/vendor/autoload.php';
 
-        if ($this->serviceContainer === null) {
-            $this->serviceContainer = new ServiceContainer($this->name, $this->getLocalPath());
-        }
-
         $this->loadEnv();
-    }
-
-    /**
-     * @param string $serviceName
-     *
-     * @return mixed
-     */
-    public function getService($serviceName)
-    {
-        return $this->serviceContainer->getService($serviceName);
     }
 
     public function install()
@@ -123,14 +108,12 @@ class PsxMarketingWithGoogle extends Module
             return defined('PS_INSTALLATION_IN_PROGRESS');
         }
 
-        // We can't init the Uninstaller in CLI, as it has been declared in the admin container and PrestaShop
-        // does not have the _PS_ADMIN_DIR_ in this environment.
-        // prestashop/module-lib-service-container:1.3.1 is known as incompatible
-        // $installer = $this->getService(Installer::class);
+        // The service container is available AFTER the module installation
+        // and cache reset, we can't call $this->get() yet.
         $installer = new Installer(
             $this,
-            $this->getService(Segment::class),
-            $this->getService(ErrorHandler::class)
+            new Segment(Context::getContext()),
+            new ErrorHandler()
         );
 
         if (!$installer->install()) {
@@ -161,13 +144,13 @@ class PsxMarketingWithGoogle extends Module
         // We can't init the Uninstaller in CLI, as it has been declared in the admin container and PrestaShop
         // does not have the _PS_ADMIN_DIR_ in this environment.
         // prestashop/module-lib-service-container:1.3.1 is known as incompatible
-        // $uninstaller = $this->getService(Uninstaller::class);
+        // $uninstaller = $this->get(Uninstaller::class);
 
         $uninstaller = new Uninstaller(
             $this,
-            $this->getService(TabRepository::class),
-            $this->getService(Segment::class),
-            $this->getService(ErrorHandler::class)
+            $this->get(TabRepository::class),
+            $this->get(Segment::class),
+            $this->get(ErrorHandler::class)
         );
 
         return $uninstaller->uninstall()
@@ -201,25 +184,25 @@ class PsxMarketingWithGoogle extends Module
 
     public function hookDisplayHeader()
     {
-        $configuration = $this->getService(ConfigurationAdapter::class);
+        $configuration = $this->get(ConfigurationAdapter::class);
 
         return base64_decode($configuration->get(Config::PSX_MKTG_WITH_GOOGLE_WEBSITE_VERIFICATION_META))
-            . $this->getService(RemarketingHookHandler::class)->handleHook(__FUNCTION__);
+            . $this->get(RemarketingHookHandler::class)->handleHook(__FUNCTION__);
     }
 
     public function hookDisplayTop()
     {
-        return $this->getService(RemarketingHookHandler::class)->handleHook(__FUNCTION__);
+        return $this->get(RemarketingHookHandler::class)->handleHook(__FUNCTION__);
     }
 
     public function hookDisplayOrderConfirmation($params)
     {
-        return $this->getService(RemarketingHookHandler::class)->handleHook(__FUNCTION__, $params);
+        return $this->get(RemarketingHookHandler::class)->handleHook(__FUNCTION__, $params);
     }
 
     public function hookActionCartUpdateQuantityBefore($params)
     {
-        return $this->getService(RemarketingHookHandler::class)->handleHook(__FUNCTION__, $params);
+        return $this->get(RemarketingHookHandler::class)->handleHook(__FUNCTION__, $params);
     }
 
     /**

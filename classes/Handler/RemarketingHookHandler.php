@@ -92,7 +92,7 @@ class RemarketingHookHandler
                     break;
                 }
 
-                $eventData = $this->module->getService(PageViewEventDataProvider::class)->getEventData($sendTo);
+                $eventData = $this->module->get(PageViewEventDataProvider::class)->getEventData($sendTo);
 
                 if ($eventData === null) {
                     break;
@@ -112,7 +112,7 @@ class RemarketingHookHandler
                 }
 
                 $this->context->smarty->assign([
-                    'eventData' => $this->module->getService(PurchaseEventDataProvider::class)->getEventData($sendTo, $data['order']),
+                    'eventData' => $this->module->get(PurchaseEventDataProvider::class)->getEventData($sendTo, $data['order']),
                 ]);
                 $this->templateBuffer->add(
                     $this->module->display($this->module->getfilePath(), '/views/templates/hook/gtagEvent.tpl')
@@ -128,7 +128,7 @@ class RemarketingHookHandler
                 }
 
                 $this->context->smarty->assign([
-                    'eventData' => $this->module->getService(CartEventDataProvider::class)->getEventData($sendTo, $data),
+                    'eventData' => $this->module->get(CartEventDataProvider::class)->getEventData($sendTo, $data),
                 ]);
                 $this->templateBuffer->add(
                     $this->module->display($this->module->getfilePath(), '/views/templates/hook/gtagEvent.tpl')

@@ -62,12 +62,18 @@ class AdminPsxMktgWithGoogleModuleController extends ModuleAdminController
     {
         parent::__construct();
         $this->bootstrap = false;
+    }
 
-        $this->module->getService(ErrorHandler::class);
-        $this->env = $this->module->getService(Env::class);
-        $this->configurationAdapter = $this->module->getService(ConfigurationAdapter::class);
-        $this->countryRepository = $this->module->getService(CountryRepository::class);
-        $this->currencyRepository = $this->module->getService(CurrencyRepository::class);
+    public function init()
+    {
+        parent::init();
+
+        // These can't be put in the constructor, as the service container is built later.
+        $this->get(ErrorHandler::class);
+        $this->env = $this->get(Env::class);
+        $this->configurationAdapter = $this->get(ConfigurationAdapter::class);
+        $this->countryRepository = $this->get(CountryRepository::class);
+        $this->currencyRepository = $this->get(CurrencyRepository::class);
         $this->moduleRepository = new ModuleRepository($this->module->name);
     }
 
@@ -88,7 +94,7 @@ class AdminPsxMktgWithGoogleModuleController extends ModuleAdminController
         ]);
 
         try {
-            $psAccountsService = $this->module->getService(PsAccounts::class)->getPsAccountsService();
+            $psAccountsService = $this->get(PsAccounts::class)->getPsAccountsService();
             $shopIdPsAccounts = $psAccountsService->getShopUuidV4();
             $tokenPsAccounts = $psAccountsService->getOrRefreshToken();
         } catch (Exception $e) {
@@ -97,7 +103,7 @@ class AdminPsxMktgWithGoogleModuleController extends ModuleAdminController
         }
 
         Media::addJsDef([
-            'contextPsAccounts' => (object) $this->module->getService(PsAccounts::class)
+            'contextPsAccounts' => (object) $this->get(PsAccounts::class)
             ->getPsAccountsPresenter()
             ->present($this->module->name),
             'i18nSettings' => [
