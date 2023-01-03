@@ -21,6 +21,7 @@ export interface State {
   psxMktgWithGoogleApiUrl: string;
   psxMktgWithGoogleAdminUrl: string;
   psxMktgWithGoogleAdminAjaxUrl: string;
+  psxMktgWithGoogleLoggedBackInUrl: string,
   psxMktgWithGoogleShopUrl: string;
   psxMktgWithGoogleActiveCountries: string[];
   psxMktgWithGoogleShopCurrency: ShopCurrency;
@@ -65,6 +66,7 @@ export const state: State = {
   psxMktgWithGoogleActiveCountries: [],
   psxMktgWithGoogleAdminUrl: '',
   psxMktgWithGoogleAdminAjaxUrl: '',
+  psxMktgWithGoogleLoggedBackInUrl: '',
   psxMktgWithGoogleShopUrl: '',
   isCountryMemberOfEuropeanUnion: false,
   psxMtgWithGoogleDefaultShopCountry: null,

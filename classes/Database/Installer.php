@@ -218,6 +218,14 @@ class Installer
                 'active' => true,
                 'icon' => '',
             ],
+            [
+                'className' => 'AdminLoggedBackPsxMktgWithGoogleController',
+                'parent' => -1,
+                'name' => $this->module->name,
+                'module' => $this->module->name,
+                'active' => true,
+                'icon' => '',
+            ],
         ];
     }
 }
