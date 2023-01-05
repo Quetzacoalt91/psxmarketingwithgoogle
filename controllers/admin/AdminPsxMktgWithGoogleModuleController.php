@@ -131,7 +131,7 @@ class AdminPsxMktgWithGoogleModuleController extends ModuleAdminController
             'psxMktgWithGoogleDsnSentry' => $this->env->get('PSX_MKTG_WITH_GOOGLE_SENTRY_CREDENTIALS_VUE'),
             'psxMktgWithGoogleApiUrl' => $this->env->get('PSX_MKTG_WITH_GOOGLE_API_URL'),
             'psxMktgWithGoogleAdminUrl' => $this->context->link->getAdminLink('AdminPsxMktgWithGoogleModule'),
-            'psxMktgWithGoogleLoggedBackInUrl' => $this->context->link->getAdminLink('AdminLoggedBackPsxMktgWithGoogleController'),
+            'psxMktgWithGoogleLoggedBackInUrl' => $this->context->link->getAdminLink('AdminLoggedBackPsxMktgWithGoogle'),
             'psxMktgWithGoogleAdminAjaxUrl' => $this->context->link->getAdminLink(
                 'AdminAjaxPsxMktgWithGoogle',
                 true,

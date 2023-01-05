@@ -16,6 +16,7 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License version 3.0
  *}
+ {literal}
  <html>
   <head>
     <title>Marketing With Google</title>
@@ -23,11 +24,12 @@
     <meta name="robots" content="NOFOLLOW, NOINDEX">
     <script>
       function init() {
-        if (!window.opener) {
-          console.error('Not opened as a popup.');
+        if (!window.opener && !window.parent) {
+          console.error('Window has been opened on hiw own, it is neither a popup or an iframe.');
+          return;
         }
 
-        window.opener.postMessage({loggedIn: true});
+        (window.opener || window.parent).postMessage({loggedIn: true});
         /*setTimeout(() => {
           window.close();
         }, 100);*/
@@ -40,3 +42,4 @@
     You are successfully logged in, you can close this window.
   </body>
  </html>
+{/literal}

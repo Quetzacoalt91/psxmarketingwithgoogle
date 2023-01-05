@@ -67,9 +67,32 @@
           <p class="mb-0">
             <strong>{{ $t('general.disconnectedBoUser.title') }}</strong><br>
             <span class="ps_gs-fz-12">{{ $t('general.disconnectedBoUser.description') }}</span>
+            <b-button
+              @click="displayLoginModal = true"
+            >
+              Log-in
+            </b-button>
           </p>
         </b-alert>
       </div>
+      <ps-modal
+        id="LoginPopin"
+        ref="modal"
+        size="xl"
+        title="Log back in"
+        :visible="displayLoginModal"
+        v-if="displayLoginModal"
+        hide-footer
+        hide-header-close
+        @close="location.reload()"
+      >
+        <iframe
+          :src="$store.state.app.psxMktgWithGoogleLoggedBackInUrl"
+          title="Login page"
+          width="100%"
+          height="500"
+        />
+      </ps-modal>
       <AlertModuleUpdate
         module-name="ps_eventbus"
         :needed-version="this.$store.state.app.cloudsyncVersionNeeded"
@@ -99,13 +122,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import {mapState} from 'vuex';
 import Menu from '@/components/menu/menu.vue';
 import MenuItem from '@/components/menu/menu-item.vue';
 import SegmentGenericParams from '@/utils/SegmentGenericParams';
 import AlertModuleUpdate from '@/components/commons/alert-update-module';
 import googleUrl from '@/assets/json/googleUrl.json';
 import {initShopClient} from '@/api/shopClient';
+import PsModal from '@/components/commons/ps-modal';
 
 let resizeEventTimer;
 const root = document.documentElement;
@@ -114,10 +138,16 @@ const headerFull = document.querySelector('#header_infos');
 
 export default {
   name: 'Home',
+  data() {
+    return {
+      displayLoginModal: false,
+    };
+  },
   components: {
     Menu,
     MenuItem,
     AlertModuleUpdate,
+    PsModal,
   },
   computed: {
     ...mapState('app', ['backOfficeUserIsLoggedIn']),
@@ -139,12 +169,14 @@ export default {
       shopUrl: this.$store.state.app.psxMktgWithGoogleAdminAjaxUrl,
       onShopSessionLoggedOut: () => {
         this.$store.commit('app/SAVE_USER_IS_LOGGED_OUT');
-      }
+      },
     });
     window.addEventListener('resize', this.resizeEventHandler);
+    window.addEventListener('message', this.messageListenedHandler);
   },
   destroyed() {
     window.removeEventListener('resize', this.resizeEventHandler);
+    window.removeEventListener('message', this.messageListenedHandler);
   },
   methods: {
     resizeEventHandler() {
@@ -152,6 +184,13 @@ export default {
       resizeEventTimer = setTimeout(() => {
         this.setCustomProperties();
       }, 250);
+    },
+    messageListenedHandler(event) {
+      if (event.data?.loggedIn === true) {
+        console.log('Message received', event);
+        this.$store.commit('app/SAVE_USER_IS_LOGGED_IN');
+        this.displayLoginModal = false;
+      }
     },
     setCustomProperties() {
       root.style.setProperty('--header-height', `${header.clientHeight}px`);

@@ -33,7 +33,7 @@ class AdminLoggedBackPsxMktgWithGoogleController extends ModuleAdminController
     public function initContent()
     {
         $this->ajax = true;
-        $this->content = $this->context->smarty->fetch('module:psxmarketingwithgoogle/views/templates/admin/loggedBackIn.tpl');
+        $this->content = $this->context->smarty->fetch($this->module->getLocalPath() . '/views/templates/admin/loggedBackIn.tpl');
     }
 
     public function postProcess()

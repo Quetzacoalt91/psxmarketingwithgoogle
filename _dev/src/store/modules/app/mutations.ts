@@ -37,4 +37,7 @@ export default {
   [MutationsTypes.SAVE_USER_IS_LOGGED_OUT](state: LocalState) {
     state.backOfficeUserIsLoggedIn = false;
   },
+  [MutationsTypes.SAVE_USER_IS_LOGGED_IN](state: LocalState) {
+    state.backOfficeUserIsLoggedIn = true;
+  },
 };
