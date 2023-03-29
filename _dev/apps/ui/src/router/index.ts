@@ -1,5 +1,4 @@
-import Vue from 'vue';
-import VueRouter, {RouteConfig} from 'vue-router';
+import {createRouter, createWebHistory} from 'vue-router';
 import Store from '../store';
 import CampaignPage from '../views/campaign-page.vue';
 import CampaignForm from '../views/campaign-form.vue';
@@ -13,8 +12,6 @@ import ReportingPage from '../views/reporting-page.vue';
 import TunnelProductFeed from '../views/tunnel-product-feed.vue';
 import {getDataFromLocalStorage} from '@/utils/LocalStorage';
 import {CampaignTypes} from '@/enums/reporting/CampaignStatus';
-
-Vue.use(VueRouter);
 
 const initialPath = (to, from, next) => {
   if (from.path === '/'
@@ -34,7 +31,7 @@ const landingExistsInLocalstorage = (to, from, next) => {
   next({name: 'landing-page'});
 };
 
-const routes: Array<RouteConfig> = [
+const routes = [
   {
     path: '/landing-page',
     name: 'landing-page',
@@ -125,25 +122,22 @@ const routes: Array<RouteConfig> = [
   },
 ];
 
-const router = new VueRouter({
+const router = createRouter({
   routes,
+  history: createWebHistory(),
   scrollBehavior(to, from, savedPosition) {
     // Allows to scroll to an anchor
     if (to.hash) {
       return {
-        selector: to.hash,
-        offset: {
-          x: 0,
-          y: 200, // Arbitrary value to take menu height into account
-        },
+        el: to.hash,
       };
-    } if (savedPosition) {
+    }
+    if (savedPosition) {
       // Allows to simulate position in page when using prev / next btn
       return savedPosition;
     }
     return {
-      x: 0,
-      y: 0,
+      top: 0,
     };
   },
 });

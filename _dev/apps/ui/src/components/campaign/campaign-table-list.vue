@@ -141,16 +141,16 @@
           </b-tr>
         </b-thead>
         <b-tbody class="bg-white">
-          <template
+          <div
             v-if="campaignList.length && !inNeedOfConfiguration"
-            class=" ps_gs-onboardingcard__not-configured"
+            class="ps_gs-onboardingcard__not-configured"
           >
             <CampaignTableListRow
               v-for="campaign in campaignList"
               :key="campaign.campaignName"
               :campaign="campaign"
             />
-          </template>
+          </div>
           <b-tr
             v-if="inNeedOfConfiguration"
           >

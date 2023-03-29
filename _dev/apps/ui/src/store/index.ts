@@ -1,6 +1,5 @@
 import SecureLS from 'secure-ls';
-import Vue from 'vue';
-import Vuex from 'vuex';
+import {createStore} from 'vuex';
 import createPersistedState from 'vuex-persistedstate';
 import app from './modules/app';
 import accounts from './modules/accounts';
@@ -8,8 +7,6 @@ import productFeed from './modules/product-feed';
 import freeListing from './modules/free-listing';
 import googleAds from './modules/google-ads';
 import campaigns from './modules/campaigns';
-
-Vue.use(Vuex);
 
 const ls = new SecureLS({encodingType: 'aes'});
 
@@ -27,7 +24,7 @@ const plugins = [
   }),
 ];
 
-export default new Vuex.Store({
+export default createStore({
   modules: {
     app,
     accounts,

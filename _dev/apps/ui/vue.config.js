@@ -24,27 +24,35 @@ module.exports = {
     config.plugins.delete('preload');
     config.plugins.delete('prefetch');
     config.resolve.alias.set('@', path.resolve(__dirname, 'src'));
+    config.resolve.alias.set('vue', '@vue/compat');
     config.module
       .rule('vue')
       .use('vue-loader')
       .tap((options) => {
-        options.compilerOptions.modules = [
-          {
-            preTransformNode(astEl) {
-              if (process.env.NODE_ENV === 'production') {
-                const {attrsMap, attrsList} = astEl;
-
-                if (attrsMap['data-test-id']) {
-                  delete attrsMap['data-test-id'];
-                  const index = attrsList.findIndex((x) => x.name === 'data-test-id');
-                  attrsList.splice(index, 1);
-                }
-              }
-              return astEl;
+        return {
+          ...options,
+          compilerOptions: {
+            compatConfig: {
+              MODE: 2
             },
-          },
-        ];
-        return options;
+            modules: [
+              {
+                preTransformNode(astEl) {
+                  if (process.env.NODE_ENV === 'production') {
+                    const {attrsMap, attrsList} = astEl;
+
+                    if (attrsMap['data-test-id']) {
+                      delete attrsMap['data-test-id'];
+                      const index = attrsList.findIndex((x) => x.name === 'data-test-id');
+                      attrsList.splice(index, 1);
+                    }
+                  }
+                  return astEl;
+                },
+              },
+            ]
+          }
+        };
       });
   },
   css: {

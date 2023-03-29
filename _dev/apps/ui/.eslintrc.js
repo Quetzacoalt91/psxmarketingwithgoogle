@@ -24,7 +24,7 @@ module.exports = {
   },
   extends: [
     'prestashop',
-    'plugin:vue/strongly-recommended',
+    'plugin:vue/vue3-recommended',
     '@vue/typescript',
   ],
   parserOptions: {
@@ -40,5 +40,13 @@ module.exports = {
     '@typescript-eslint/no-shadow': ['error'],
     // Need some help to handle this error
     'no-restricted-exports': 'off',
+    // Disabled during migration to vue 3, but we need to fix these issues later
+    'vue/multi-word-component-names': 'off',
+    'vue/no-mutating-props': 'off',
+    'vue/no-reserved-component-names': 'off',
+    'vue/no-deprecated-slot-attribute': 'off',
+    'vue/no-deprecated-destroyed-lifecycle': 'off',
+    'vue/no-deprecated-filter': 'off',
+    'vue/no-deprecated-dollar-listeners-api': 'off',
   },
 };

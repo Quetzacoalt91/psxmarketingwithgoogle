@@ -312,7 +312,7 @@
                       $t(`smartShoppingCampaignCreation.${dimensionName}`),
                       this.totalProducts,
                     ],
-                  ),
+                  )
                   }}
                 </div>
               </div>

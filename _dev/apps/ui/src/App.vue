@@ -21,7 +21,7 @@
         <Menu>
           <MenuItem
             v-if="!currentlyOnLandingPage"
-            @click.native="throwSegmentEvent"
+            @click="throwSegmentEvent"
             :route="{name: 'reporting'}"
           >
             {{ $t('general.tabs.reporting') }}
@@ -98,6 +98,7 @@ import SegmentGenericParams from '@/utils/SegmentGenericParams';
 import AlertModuleUpdate from '@/components/commons/alert-update-module';
 import googleUrl from '@/assets/json/googleUrl.json';
 import PopinUserNotConnectedToBo from '@/components/commons/user-not-connected-to-bo-popin.vue';
+import CampaignStatus from '@/enums/reporting/CampaignStatus';
 
 let resizeEventTimer;
 const root = document.documentElement;
@@ -132,7 +133,7 @@ export default {
     },
   },
   created() {
-    this.$root.identifySegment();
+    this.identifySegment();
     this.$store.dispatch('app/CHECK_FOR_AD_BLOCKER');
     this.setCustomProperties();
     initShopClient({
@@ -175,10 +176,36 @@ export default {
         params: SegmentGenericParams,
       });
     },
+    identifySegment() {
+      // @ts-ignore
+      if (!this.$segment) {
+        return;
+      }
+
+      const psAccountContext = this.$store.getters['accounts/GET_PS_ACCOUNTS_CONTEXT'];
+      const userId = this.$store.state.accounts.shopIdPsAccounts;
+      const campaigns = this.$store.getters['campaigns/GET_ALL_CAMPAIGNS'];
+      const isActiveCamp = campaigns.some((camp) => camp.status === CampaignStatus.ELIGIBLE);
+
+      if (userId) {
+        // @ts-ignore
+        this.$segment.identify(userId, {
+          name: psAccountContext.currentShop.domainSsl,
+          email: psAccountContext.user.email,
+          language: this.$i18n.locale,
+          version_ps: this.$store.state.app.psVersion,
+          ggl_module_version: this.$store.state.app.psxMktgWithGoogleModuleVersion,
+          ggl_api_endpoint: this.$store.state.app.psxMktgWithGoogleApiUrl,
+          ggl_user_has_enabled_campaign: isActiveCamp,
+          ggl_user_has_googleAds_connected: !!this.$store.state.googleAds.accountChosen,
+          ggl_user_has_productFeed_exported: this.$store.state.productFeed.isConfigured,
+        });
+      }
+    },
   },
   watch: {
     $route() {
-      this.$root.identifySegment();
+      this.identifySegment();
     },
   },
   googleUrl,

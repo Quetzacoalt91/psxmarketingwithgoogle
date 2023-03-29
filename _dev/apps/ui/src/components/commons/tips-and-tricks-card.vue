@@ -62,13 +62,12 @@
 
 <script lang="ts">
 import {defineComponent, PropType} from 'vue';
-import {VBToggle, BCollapse} from 'bootstrap-vue';
+import {BCollapse} from 'bootstrap-vue';
 
 export default defineComponent({
   name: 'TipsAndTricksCard',
   components: {
     BCollapse,
-    VBToggle,
   },
   props: {
     content: {

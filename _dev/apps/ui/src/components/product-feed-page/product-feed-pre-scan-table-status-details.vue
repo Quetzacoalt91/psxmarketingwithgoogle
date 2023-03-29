@@ -117,8 +117,9 @@
           <template
             v-else
             v-for="(product, productIndex) in items"
+            :key="productIndex"
           >
-            <b-tr :key="productIndex">
+            <b-tr>
               <b-td class="align-top">
                 {{ product.productId }}
                 {{ product.attributeId > 0 ? '&#8209; ' + product.attributeId : '' }}

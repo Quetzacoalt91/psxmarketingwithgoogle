@@ -92,7 +92,7 @@
           class="ml-2 ps_gs-onboardingcard__content"
         >
           <VueShowdown
-            @click.native="segmentClicked"
+            @click="segmentClicked"
             class="mb-1"
             tag="p"
             :markdown="this.$i18n.t('mcaCard.introDisabled')"
@@ -322,6 +322,7 @@
           <span class="text-muted d-block">
             <template
               v-for="(issue, index) in selectedMcaDetails.isSuspended.issues"
+              :key="index"
             ><!--
             comment is necessary to have the comma next to the link
           --><span
@@ -331,7 +332,6 @@
               >, </span><!--
             comment is necessary to have the comma next to the link
           --><a
-            :key="index"
             :href="issue.documentation"
             target="_blank"
             class="text-muted ps_gs-fz-12 font-weight-normal mt-3 mt-md-0"

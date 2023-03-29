@@ -22,7 +22,7 @@
     >
       <b-pagination
         @change="goToPage"
-        v-model="activePage"
+        v-model="currentPage"
         :total-rows="totalPages"
         :per-page="1"
         first-number
@@ -43,6 +43,11 @@ export default {
   components: {
     PageNumberSelector,
     ResultNumberSelector,
+  },
+  data() {
+    return {
+      currentPage: this.activePage,
+    };
   },
   props: {
     totalPages: {

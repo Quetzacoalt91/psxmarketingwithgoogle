@@ -153,7 +153,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from '@vue/composition-api';
+import {defineComponent} from 'vue';
 import SegmentGenericParams from '@/utils/SegmentGenericParams';
 import prestashopUrl from '@/assets/json/prestashopUrl.json';
 
