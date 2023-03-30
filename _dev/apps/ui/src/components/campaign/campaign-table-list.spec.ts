@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import cloneDeep from 'lodash.clonedeep';
@@ -40,7 +40,7 @@ describe('campaign-table-list.vue - display banner SSC ads if user is configured
         loading: false,
       },
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       directives: {
         'b-tooltip': VBTooltip,
       },
@@ -90,7 +90,7 @@ describe('campaign-table-list.vue - hide banner SSC ads if user is not configure
         loading: false,
       },
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       directives: {
         'b-tooltip': VBTooltip,
       },
@@ -141,7 +141,7 @@ describe('campaign-table-list.vue - show banner SSC ads if user has campaigns', 
         loading: false,
       },
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       directives: {
         'b-tooltip': VBTooltip,
       },

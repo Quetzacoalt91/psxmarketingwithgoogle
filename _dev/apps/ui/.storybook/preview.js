@@ -20,7 +20,7 @@
 import { addDecorator } from '@storybook/vue';
 import { select } from '@storybook/addon-knobs';
 import Vue from 'vue';
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 import {initShopClient} from "mktg-with-google-common/api/shopClient";
 import {initOnboardingClient} from "mktg-with-google-common/api/onboardingClient";
 
@@ -147,7 +147,7 @@ import '../src/utils/Filters';
      initShopClient({shopUrl: '/'});
      initOnboardingClient({token: 'token', apiUrl: `${window.location.protocol}//${window.location.host}`});
    },
-   store: new Vuex.Store(cloneStore()),
+   store: createStore(cloneStore()),
    router: new VueRouter(),
  }));
 

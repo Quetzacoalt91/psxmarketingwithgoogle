@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {shallowMount} from '@vue/test-utils';
@@ -22,7 +22,7 @@ describe('merchant-center-account-card.vue', () => {
         isEnabled: false,
       },
       ...config,
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
     });
     wrapper.vm.$refs.mcaSelection = undefined;
 
@@ -39,7 +39,7 @@ describe('merchant-center-account-card.vue', () => {
         isEnabled: false,
       },
       ...config,
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
     });
 
     // Check disabled state
@@ -55,7 +55,7 @@ describe('merchant-center-account-card.vue', () => {
         isEnabled: true,
       },
       ...config,
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
     });
 
     // Check enabled state
@@ -76,7 +76,7 @@ describe('merchant-center-account-card.vue / API errors', () => {
         isEnabled: true,
       },
       ...config,
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
     });
 
     await wrapper.vm.$store.dispatch(`accounts/${actionsTypes.REQUEST_GMC_LIST}`);

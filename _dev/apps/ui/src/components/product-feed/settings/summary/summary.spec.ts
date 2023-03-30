@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {shallowMount} from '@vue/test-utils';
@@ -42,7 +42,7 @@ describe('summary', () => {
       propsData: Summary.args,
       beforeMount: Summary.args.beforeMount,
       localVue,
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
     });
 
     expect(wrapper.findComponent(productFeedSummaryCards).exists()).toBeTruthy();
@@ -57,7 +57,7 @@ describe('summary', () => {
       propsData: Summary.args,
       beforeMount: Summary.args.beforeMount,
       localVue,
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
       stubs: {
         ActionsButtons,
       },

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {shallowMount, mount} from '@vue/test-utils';
@@ -88,7 +88,7 @@ describe('product-feed-card.vue', () => {
         loading: false,
       },
       ...config,
-      store: new Vuex.Store(storeDisabledOrNotConfigured),
+      store: createStore(storeDisabledOrNotConfigured),
     });
     expect(wrapper.find('.ps_gs-onboardingcard').classes('ps_gs-onboardingcard--disabled')).toBe(true);
     expect(wrapper.findComponent(BAlert).exists()).toBeFalsy();
@@ -101,7 +101,7 @@ describe('product-feed-card.vue', () => {
         loading: false,
         ...config,
       },
-      store: new Vuex.Store(storeDisabledOrNotConfigured),
+      store: createStore(storeDisabledOrNotConfigured),
     });
     expect(wrapper.findComponent(ProductFeedStepper).exists()).toBeFalsy();
     expect(wrapper.findComponent(BAlert).exists()).toBeFalsy();
@@ -115,7 +115,7 @@ describe('product-feed-card.vue', () => {
         loading: false,
         ...config,
       },
-      store: new Vuex.Store(storePartiallyConfigured),
+      store: createStore(storePartiallyConfigured),
     });
     expect(wrapper.findComponent(ProductFeedStepper).exists()).toBeTruthy();
     expect(wrapper.findComponent(ProductFeedStepper).props('activeStep')).toBe(2);
@@ -134,7 +134,7 @@ describe('product-feed-card.vue', () => {
         isEnabled: true,
         loading: false,
       },
-      store: new Vuex.Store(storeDisabledOrNotConfigured),
+      store: createStore(storeDisabledOrNotConfigured),
     });
     await wrapper.find('b-button').trigger('click');
     expect(mockRouter.push).toHaveBeenCalledTimes(1);
@@ -149,7 +149,7 @@ describe('product-feed-card.vue', () => {
       },
       ...config,
       localVue,
-      store: new Vuex.Store(storeConfigured),
+      store: createStore(storeConfigured),
     });
     expect(wrapper.findComponent(BAlert).exists()).toBeFalsy();
     expect(wrapper.findComponent(productFeedSummaryCards).exists()).toBeTruthy();
@@ -167,7 +167,7 @@ describe('product-feed-card.vue', () => {
       stubs: {
         VueShowdown: true,
       },
-      store: new Vuex.Store(storeReadyForExport),
+      store: createStore(storeReadyForExport),
     });
     expect(wrapper.find('b-alert')).toBeTruthy();
     expect(wrapper.find('b-alert').attributes('variant')).toBe('info');
@@ -183,7 +183,7 @@ describe('product-feed-card.vue', () => {
       },
       ...config,
       localVue,
-      store: new Vuex.Store(storeMissingFields),
+      store: createStore(storeMissingFields),
       stubs: {
         VueShowdown: true,
       },
@@ -208,7 +208,7 @@ describe('product-feed-card.vue', () => {
         VueShowdown: true,
         BAlert,
       },
-      store: new Vuex.Store(storeApiError),
+      store: createStore(storeApiError),
     });
     expect(wrapper.findComponent(ProductFeedStepper).exists()).toBeFalsy();
     expect(wrapper.find('b-button').attributes('disabled')).toBe('true');
@@ -225,7 +225,7 @@ describe('product-feed-card.vue', () => {
       },
       ...config,
       localVue,
-      store: new Vuex.Store(storeSyncFailed),
+      store: createStore(storeSyncFailed),
       stubs: {
         VueShowdown: true,
       },

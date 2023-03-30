@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {mount, MountOptions} from '@vue/test-utils';
@@ -26,7 +26,7 @@ import googleAdsNotChosen, {googleAdsAccountChosen} from '../../../.storybook/mo
 describe('google-ads-account.vue / disabled', () => {
   it('card is greyed out when card is disabled', () => {
     const wrapper = mount(GoogleAccountCard, {
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
       propsData: Disabled.args,
       beforeMount: Disabled.args.beforeMount,
       stubs: {
@@ -53,7 +53,7 @@ describe('google-ads-account.vue / enabled', () => {
 
     return mount(GoogleAccountCard, {
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       ...config,
       ...options,
     });
@@ -66,7 +66,7 @@ describe('google-ads-account.vue / enabled', () => {
     const wrapper = buildWrapper({
       propsData: Enabled.args,
       beforeMount: Enabled.args.beforeMount,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       stubs: {
         VueShowdown: true,
       },
@@ -83,7 +83,7 @@ describe('google-ads-account.vue / enabled', () => {
     const wrapper = buildWrapper({
       propsData: Enabled.args,
       beforeMount: Enabled.args.beforeMount,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       stubs: {
         VueShowdown: true,
       },
@@ -104,7 +104,7 @@ describe('google-ads-account.vue / enabled', () => {
     const wrapper = buildWrapper({
       propsData: EnabledButNoAccount.args,
       beforeMount: EnabledButNoAccount.args.beforeMount,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       stubs: {
         VueShowdown: true,
       },
@@ -121,7 +121,7 @@ describe('google-ads-account.vue / enabled', () => {
     const wrapper = buildWrapper({
       propsData: CantConnect.args,
       beforeMount: CantConnect.args.beforeMount,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       stubs: {
         VueShowdown: true,
       },
@@ -138,7 +138,7 @@ describe('google-ads-account.vue / enabled', () => {
     const wrapper = buildWrapper({
       propsData: EnabledConnected.args,
       beforeMount: EnabledConnected.args.beforeMount,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       stubs: {
         VueShowdown: true,
       },
@@ -157,7 +157,7 @@ describe('google-ads-account.vue / enabled', () => {
     const wrapper = buildWrapper({
       propsData: Canceled.args,
       beforeMount: Canceled.args.beforeMount,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       stubs: {
         VueShowdown: true,
       },
@@ -178,7 +178,7 @@ describe('google-ads-account.vue / enabled', () => {
     const wrapper = buildWrapper({
       propsData: Suspended.args,
       beforeMount: Suspended.args.beforeMount,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       stubs: {
         VueShowdown: true,
       },

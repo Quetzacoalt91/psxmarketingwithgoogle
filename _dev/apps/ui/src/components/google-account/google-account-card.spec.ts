@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {mount} from '@vue/test-utils';
@@ -87,7 +87,7 @@ describe('google-account-card.vue', () => {
   it('account email visible when connected', () => {
     const wrapper = mount(GoogleAccountCard, {
       ...config,
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
       propsData: Connected.args,
       stubs: {
         VueShowdown: true,

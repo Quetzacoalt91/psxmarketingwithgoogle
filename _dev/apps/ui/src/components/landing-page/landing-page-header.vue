@@ -46,13 +46,14 @@
   </header>
 </template>
 
-<script>
+<script lang="ts">
+import {defineComponent} from 'vue';
 import {VueShowdown} from 'vue-showdown';
 
-export default {
+export default defineComponent({
   name: 'LandingPageHeader',
   components: {
     VueShowdown,
   },
-};
+});
 </script>

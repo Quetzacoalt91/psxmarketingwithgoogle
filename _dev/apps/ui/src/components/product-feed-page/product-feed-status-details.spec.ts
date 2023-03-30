@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {shallowMount} from '@vue/test-utils';
@@ -32,7 +32,7 @@ describe('product-feed-status-details.vue', () => {
     };
     const wrapper = shallowMount(ProductFeedTableStatusDetails, {
       ...config,
-      store: new Vuex.Store(storeConfigured),
+      store: createStore(storeConfigured),
     });
     expect(wrapper.findAllComponents(ProductFeedTableStatusDetailsRow).exists()).toBeTruthy();
   });
@@ -43,7 +43,7 @@ describe('product-feed-status-details.vue', () => {
     };
     const wrapper = shallowMount(ProductFeedTableStatusDetails, {
       ...config,
-      store: new Vuex.Store(storeConfiguredButNoIssued),
+      store: createStore(storeConfiguredButNoIssued),
     });
     expect(wrapper.findAllComponents(ProductFeedTableStatusDetailsRow).exists()).toBeFalsy();
   });
@@ -54,7 +54,7 @@ describe('product-feed-status-details.vue', () => {
     };
     const wrapper = shallowMount(ProductFeedTableStatusDetails, {
       ...config,
-      store: new Vuex.Store(storeConfigured),
+      store: createStore(storeConfigured),
     });
     expect(wrapper.findAllComponents(ProductFeedTableStatusDetailsRow).length).toBe(8);
   });

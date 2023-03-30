@@ -4,7 +4,7 @@
 
 // Import this file first to init mock on window
 import {shallowMount} from '@vue/test-utils';
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 import cloneDeep from 'lodash.clonedeep';
 import config, {cloneStore} from '@/../tests/init';
 import {initialStateApp} from '../../.storybook/mock/state-app';
@@ -23,7 +23,7 @@ describe('landing-page.vue', () => {
   it('shows all the onboarding details', () => {
     const wrapper = shallowMount(LandingPage, {
       ...config,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
     expect(wrapper.find('.ps_gs-landingpage').isVisible()).toBe(true);
   });

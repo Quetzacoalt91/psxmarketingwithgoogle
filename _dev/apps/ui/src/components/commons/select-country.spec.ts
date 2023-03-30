@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 import VueShowdown from 'vue-showdown';
 import {mount} from '@vue/test-utils';
 import config, {cloneStore} from '@/../tests/init';
@@ -38,7 +38,7 @@ describe('select countries', () => {
   it('should return an array with multiple countries', async () => {
     const wrapper = mount(SelectCountry, {
       ...config,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       propsData: {
         dropdownOptions: countries,
         multipleCountries: true,
@@ -67,7 +67,7 @@ describe('select countries', () => {
   it('should return an array with only one country', async () => {
     const wrapper = mount(SelectCountry, {
       ...config,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       propsData: {
         dropdownOptions: countries,
         multipleCountries: false,

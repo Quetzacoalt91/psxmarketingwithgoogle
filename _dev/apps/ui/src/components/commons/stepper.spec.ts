@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {shallowMount} from '@vue/test-utils';
@@ -66,7 +66,7 @@ describe('stepper.vue', () => {
     const wrapper = shallowMount(Stepper, {
       propsData,
       ...config,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     // Check if all steps before the active one have the class .complete
@@ -77,7 +77,7 @@ describe('stepper.vue', () => {
     const wrapper = shallowMount(Stepper, {
       propsData,
       ...config,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     // Check if all steps before the active one are links
@@ -88,7 +88,7 @@ describe('stepper.vue', () => {
     const wrapper = shallowMount(Stepper, {
       propsData,
       ...config,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     // Check if the active step has the class .active
@@ -103,7 +103,7 @@ describe('stepper.vue', () => {
       },
       propsData,
       ...config,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     // Check clicking on a previous step is emiting the event changeStep

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import {mount, MountOptions} from '@vue/test-utils';
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 import cloneDeep from 'lodash.clonedeep';
 import config, {localVue, cloneStore} from '@/../tests/init';
 import DeliveryTimeAndRatesVue from './delivery-time-and-rates.vue';
@@ -28,7 +28,7 @@ describe('delivery-time-and-rates.vue', () => {
 
       return mount(CustomCarrierForm, {
         localVue,
-        store: new Vuex.Store(store),
+        store: createStore(store),
         ...config,
         ...options,
       });
@@ -45,7 +45,7 @@ describe('delivery-time-and-rates.vue', () => {
             estimateCarrier: carrier,
             displayValidationErrors: false,
           },
-          store: new Vuex.Store(store),
+          store: createStore(store),
         });
 
         expect(wrapper.isVisible()).toBe(true);
@@ -67,7 +67,7 @@ describe('delivery-time-and-rates.vue', () => {
             estimateCarrier: carrier,
             displayValidationErrors: false,
           },
-          store: new Vuex.Store(store),
+          store: createStore(store),
         });
 
         const radios = wrapper.findAll('.form-check');
@@ -92,7 +92,7 @@ describe('delivery-time-and-rates.vue', () => {
             estimateCarrier: carrier,
             displayValidationErrors: false,
           },
-          store: new Vuex.Store(store),
+          store: createStore(store),
         });
 
         const radios = wrapper.findAll('.form-check');
@@ -117,7 +117,7 @@ describe('delivery-time-and-rates.vue', () => {
             estimateCarrier: carrier,
             displayValidationErrors: true,
           },
-          store: new Vuex.Store(store),
+          store: createStore(store),
         });
 
         expect(wrapper.vm.validateCarrierName).toBe(false);
@@ -134,7 +134,7 @@ describe('delivery-time-and-rates.vue', () => {
             estimateCarrier: carrier,
             displayValidationErrors: true,
           },
-          store: new Vuex.Store(store),
+          store: createStore(store),
         });
 
         expect(wrapper.vm.validateRadio).toBe(false);
@@ -152,7 +152,7 @@ describe('delivery-time-and-rates.vue', () => {
             estimateCarrier: carrier,
             displayValidationErrors: true,
           },
-          store: new Vuex.Store(store),
+          store: createStore(store),
         });
 
         expect(wrapper.vm.validateTimeDelivery).toBe(false);
@@ -170,7 +170,7 @@ describe('delivery-time-and-rates.vue', () => {
 
       return mount(CountriesFromList, {
         localVue,
-        store: new Vuex.Store(store),
+        store: createStore(store),
         ...config,
         ...options,
       });
@@ -192,7 +192,7 @@ describe('delivery-time-and-rates.vue', () => {
           rateChosen: RateType.RATE_ALL_COUNTRIES,
           displayValidationErrors: true,
         },
-        store: new Vuex.Store(store),
+        store: createStore(store),
       });
 
       expect(wrapper.vm.validateCarrier(carriers[0])).toBe(true);
@@ -213,7 +213,7 @@ describe('delivery-time-and-rates.vue', () => {
           rateChosen: RateType.RATE_PER_COUNTRY,
           displayValidationErrors: true,
         },
-        store: new Vuex.Store(store),
+        store: createStore(store),
       });
 
       const cards = wrapper.findAll('.estimateMultiCountries #card_per_country');
@@ -237,7 +237,7 @@ describe('delivery-time-and-rates.vue', () => {
           rateChosen: RateType.RATE_ALL_COUNTRIES,
           displayValidationErrors: true,
         },
-        store: new Vuex.Store(store),
+        store: createStore(store),
       });
 
       const cards = wrapper.findAll('.estimateMultiCountries #for_all_countries');
@@ -261,7 +261,7 @@ describe('delivery-time-and-rates.vue', () => {
           rateChosen: null,
           displayValidationErrors: true,
         },
-        store: new Vuex.Store(store),
+        store: createStore(store),
       });
 
       expect(wrapper.find('.estimateMultiCountries #for_all_countries').exists()).toBeFalsy();
@@ -278,7 +278,7 @@ describe('delivery-time-and-rates.vue', () => {
       const wrapper = mount(DeliveryTimeAndRatesVue, {
         ...config,
         localVue,
-        store: new Vuex.Store(store),
+        store: createStore(store),
         ...options,
       });
       wrapper.setData({countries: ['FR']});

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import cloneDeep from 'lodash.clonedeep';
@@ -37,7 +37,7 @@ const buildWrapper = (
 
   return shallowMount(CampaignCreation, {
     localVue,
-    store: new Vuex.Store(store),
+    store: createStore(store),
     directives: {
       'b-tooltip': VBTooltip,
     },

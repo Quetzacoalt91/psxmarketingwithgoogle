@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
 */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 import cloneDeep from 'lodash.clonedeep';
 import {MountOptions, shallowMount, Wrapper} from '@vue/test-utils';
@@ -19,7 +19,7 @@ const buildWrapper = (
 
   return shallowMount(SectionTitle, {
     localVue,
-    store: new Vuex.Store(store),
+    store: createStore(store),
     ...config,
     stubs: {
       VueShowdown: true,
@@ -37,7 +37,7 @@ describe('Testing differents case for the sectionTitle components', () => {
         isEnabled: true,
         isDone: false,
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     expect(wrapper.find('.ps_gs-section-title .circle').text()).toBe('1');
@@ -55,7 +55,7 @@ describe('Testing differents case for the sectionTitle components', () => {
         isEnabled: true,
         isDone: true,
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     expect(wrapper.find('.ps_gs-section-title .circle').exists()).toBeFalsy();
@@ -71,7 +71,7 @@ describe('Testing differents case for the sectionTitle components', () => {
         isEnabled: false,
         isDone: false,
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     expect(wrapper.find('.ps_gs-section-title .circle').classes()).toContain('bg-circle-disabled');
@@ -105,7 +105,7 @@ describe('Testing differents case for the sectionTitle components', () => {
     for (let i = 0; i < steps.length; i += 1) {
       wrapper.push(buildWrapper({
         propsData: steps[i],
-        store: new Vuex.Store(store),
+        store: createStore(store),
       }));
     }
 

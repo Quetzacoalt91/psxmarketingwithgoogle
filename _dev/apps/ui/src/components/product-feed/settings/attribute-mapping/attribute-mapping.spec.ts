@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 import {shallowMount, mount} from '@vue/test-utils';
 import {BFormCheckboxGroup, BFormCheckbox} from 'bootstrap-vue';
 import config, {cloneStore, localVue} from '@/../tests/init';
@@ -44,7 +44,7 @@ describe('attribute-mapping.vue', () => {
       ...wrapperOptions,
       ...config,
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     expect(wrapper.isVisible()).toBe(true);
@@ -55,7 +55,7 @@ describe('attribute-mapping.vue', () => {
       ...wrapperOptions,
       ...config,
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     await wrapper.setData({selectedProductCategories: []});
@@ -67,7 +67,7 @@ describe('attribute-mapping.vue', () => {
       ...wrapperOptions,
       ...config,
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     await wrapper.setData({selectedProductCategories: [Categories.NONE]});
@@ -79,7 +79,7 @@ describe('attribute-mapping.vue', () => {
       ...wrapperOptions,
       ...config,
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     await wrapper.setData({
@@ -97,7 +97,7 @@ describe('attribute-mapping.vue', () => {
       ...wrapperOptions,
       ...config,
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     await wrapper.setData({selectedProductCategories: []});
@@ -109,7 +109,7 @@ describe('attribute-mapping.vue', () => {
       ...wrapperOptions,
       ...config,
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     await wrapper.setData({selectedProductCategories: [Categories.NONE]});

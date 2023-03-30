@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 import {mount, Wrapper} from '@vue/test-utils';
 import {BFormRadio} from 'bootstrap-vue';
@@ -36,7 +36,7 @@ describe('shipping-setup.vue', () => {
         badges: [],
         loading: false,
       },
-      store: new Vuex.Store(getStore(settings)),
+      store: createStore(getStore(settings)),
     });
 
   it('displays unselected options by default', () => {

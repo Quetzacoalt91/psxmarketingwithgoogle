@@ -7,7 +7,7 @@
 // shallowMount creates the components without its children. Mount creates them all
 
 import {shallowMount} from '@vue/test-utils';
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 import config, {cloneStore} from '@/../tests/init';
 import TunnelProductFeed from '@/views/tunnel-product-feed.vue';
 
@@ -30,7 +30,7 @@ describe('tunnel-product-feed.vue', () => {
   it('dispatches actions before Create', () => {
     const wrapper = shallowMount(TunnelProductFeed, {
       ...config,
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
     expect(actions.GET_PRODUCT_FEED_SETTINGS).toHaveBeenCalled();
     expect(actions.GET_PRODUCT_FEED_SYNC_STATUS).toHaveBeenCalled();

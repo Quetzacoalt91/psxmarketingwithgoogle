@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {mount, shallowMount} from '@vue/test-utils';
@@ -42,7 +42,7 @@ describe('google-ads-account-popin-new.vue', () => {
   it('create account button is disabled when inputs not filled but checkbox is  checked', async () => {
     const wrapper = mount(GoogleAdsAccountPopinNew, {
       ...wrapperOptions,
-      store: new Vuex.Store(storeInitApp),
+      store: createStore(storeInitApp),
       localVue,
       stubs: {
         VueShowdown: true,
@@ -76,7 +76,7 @@ describe('google-ads-account-popin-new.vue', () => {
   it('create account button is disabled when inputs filled but checkbox is not checked', async () => {
     const wrapper = mount(GoogleAdsAccountPopinNew, {
       ...wrapperOptions,
-      store: new Vuex.Store(storeInitApp),
+      store: createStore(storeInitApp),
       localVue,
       stubs: {
         VueShowdown: true,
@@ -103,7 +103,7 @@ describe('google-ads-account-popin-new.vue', () => {
   it('create account button is enabled when everything is checked', async () => {
     const wrapper = mount(GoogleAdsAccountPopinNew, {
       ...wrapperOptions,
-      store: new Vuex.Store(storeInitApp),
+      store: createStore(storeInitApp),
       localVue,
       stubs: {
         VueShowdown: true,

@@ -9,7 +9,7 @@ module.exports = {
     'vue',
   ],
   transform: {
-    '^.+\\.vue$': '@vue/vue2-jest',
+    '^.+\\.vue$': '@vue/vue3-jest',
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     '^.+\\.jsx?$': 'babel-jest',
     '^.+\\.tsx?$': 'ts-jest',
@@ -25,5 +25,6 @@ module.exports = {
   ],
   testEnvironmentOptions: {
     url: 'http://localhost/',
+    customExportConditions: ["node", "node-addons"],
   },
 };

@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 import {mount, MountOptions} from '@vue/test-utils';
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 import cloneDeep from 'lodash.clonedeep';
 import config, {localVue, cloneStore} from '@/../tests/init';
 import TargetCountries from '@/components/product-feed/settings/delivery-time-and-rates/target-countries.vue';
@@ -27,7 +27,7 @@ describe('target-countries.vue', () => {
       propsData: {
         countries: ['FR', 'US', 'LEULEU'],
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     // The update of the list should be updated to keep only France and United States
@@ -60,7 +60,7 @@ describe('target-countries.vue / Estimating carriers', () => {
         countries: [],
         shippingSetupOption: ShippingSetupOption.ESTIMATE,
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     const listOfAcceptableCountries = wrapper.vm.selectableCountriesList;
@@ -96,7 +96,7 @@ describe('target-countries.vue / Estimating carriers', () => {
         countries: [],
         shippingSetupOption: ShippingSetupOption.ESTIMATE,
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     const listOfAcceptableCountries = wrapper.vm.selectableCountriesList;
@@ -121,7 +121,7 @@ describe('target-countries.vue / Estimating carriers', () => {
         countries: [],
         shippingSetupOption: ShippingSetupOption.ESTIMATE,
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     const listOfAcceptableCountries = wrapper.vm.selectableCountriesList;
@@ -148,7 +148,7 @@ describe('target-countries.vue / Importing carriers', () => {
         countries: [],
         shippingSetupOption: ShippingSetupOption.IMPORT,
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     const listOfAcceptableCountries = wrapper.vm.selectableCountriesList;
@@ -167,7 +167,7 @@ describe('target-countries.vue / Campaign form', () => {
       propsData: {
         countries: [],
       },
-      store: new Vuex.Store(cloneStore()),
+      store: createStore(cloneStore()),
     });
 
     const listOfAcceptableCountries = wrapper.vm.selectableCountriesList;
@@ -278,7 +278,7 @@ describe('target-countries.vue / Campaign form', () => {
         countries: ['US'],
         shippingSetupOption: null,
       },
-      store: new Vuex.Store(store),
+      store: createStore(store),
     });
 
     expect(wrapper.find('[data-test-id="configureTax"]').exists()).toBeFalsy();
@@ -298,7 +298,7 @@ const testCheckingTaxPanelIsVisible = async (method: ShippingSetupOption) => {
       countries: [],
       shippingSetupOption: method,
     },
-    store: new Vuex.Store(store),
+    store: createStore(store),
   });
   await wrapper.vm.$nextTick();
 

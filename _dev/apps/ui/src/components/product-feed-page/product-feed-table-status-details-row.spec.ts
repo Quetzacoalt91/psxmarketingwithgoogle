@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import Vuex from 'vuex';
+import Vuex, { createStore } from 'vuex';
 
 // Import this file first to init mock on window
 import {mount, MountOptions, Wrapper} from '@vue/test-utils';
@@ -23,7 +23,7 @@ describe('product-feed-table-status-details-row.vue', () => {
 
     return mount(productFeedTableStatusDetailsRowVue, {
       localVue,
-      store: new Vuex.Store(store),
+      store: createStore(store),
       ...config,
       ...options,
     });
