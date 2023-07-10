@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2433c6efefe83de43272ae43018e9064",
+    "content-hash": "c970e10263ff97a8af55a4bc63bdde2b",
     "packages": [
         {
             "name": "clue/stream-filter",
@@ -721,16 +721,16 @@
         },
         {
             "name": "prestashop/prestashop-accounts-installer",
-            "version": "dev-main",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PrestaShopCorp/prestashop-accounts-installer.git",
-                "reference": "d3e695d5a5b9a270968d42d2c4f6af4f59a8c7f7"
+                "reference": "0ad934bc540558db3944a9a1e5b08b852bb46e8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PrestaShopCorp/prestashop-accounts-installer/zipball/d3e695d5a5b9a270968d42d2c4f6af4f59a8c7f7",
-                "reference": "d3e695d5a5b9a270968d42d2c4f6af4f59a8c7f7",
+                "url": "https://api.github.com/repos/PrestaShopCorp/prestashop-accounts-installer/zipball/0ad934bc540558db3944a9a1e5b08b852bb46e8b",
+                "reference": "0ad934bc540558db3944a9a1e5b08b852bb46e8b",
                 "shasum": ""
             },
             "require": {
@@ -742,7 +742,6 @@
                 "phpunit/phpunit": "^5.7",
                 "prestashop/php-dev-tools": "3.*"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -756,9 +755,9 @@
             "description": "Utility package to install `ps_accounts` module or present data to trigger manual install from psx configuration page.",
             "support": {
                 "issues": "https://github.com/PrestaShopCorp/prestashop-accounts-installer/issues",
-                "source": "https://github.com/PrestaShopCorp/prestashop-accounts-installer/tree/main"
+                "source": "https://github.com/PrestaShopCorp/prestashop-accounts-installer/tree/v1.0.4"
             },
-            "time": "2022-07-27T08:16:37+00:00"
+            "time": "2023-05-04T07:24:48+00:00"
         },
         {
             "name": "psr/http-client",
@@ -4992,9 +4991,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "prestashop/prestashop-accounts-installer": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
