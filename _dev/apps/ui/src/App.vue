@@ -160,17 +160,6 @@ export default {
     reload() {
       window.location.reload();
     },
-    throwSegmentEvent() {
-      this.$segment.track('[GGL] Clicked on reporting tab', {
-        module: 'psxmarketingwithgoogle',
-        userId: this.$store.state.accounts.shopIdPsAccounts,
-        traits: {
-          email: this.$store.state.accounts.contextPsAccounts.user.email,
-          psx_pg_report_last_activity: new Date(),
-        },
-        params: SegmentGenericParams,
-      });
-    },
   },
   watch: {
     $route() {
