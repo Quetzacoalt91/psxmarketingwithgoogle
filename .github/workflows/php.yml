@@ -9,13 +9,13 @@ jobs:
         uses: actions/checkout@v4
 
       - name: PHP syntax checker 7.2
-        uses: prestashop/github-action-php-lint/7.2@master
+        uses: PrestaShopCorp/github-action-php-lint/7.2@master
 
       - name: PHP syntax checker 7.3
-        uses: prestashop/github-action-php-lint/7.3@master
+        uses: PrestaShopCorp/github-action-php-lint/7.3@master
 
       - name: PHP syntax checker 7.4
-        uses: prestashop/github-action-php-lint/7.4@master
+        uses: PrestaShopCorp/github-action-php-lint/7.4@master
 
   php-cs-fixer:
     name: PHP-CS-Fixer
